@@ -12,6 +12,16 @@ public class playerhealth : MonoBehaviour
 
     public delegate void HealthChangedHandler(float newhealth, float amountChanged);
     public event HealthChangedHandler OnHealthChanged;
+
+    public delegate void HealthInitializedHandler(float newhealth);
+    public event HealthInitializedHandler OnHealthInitialized;
+
+    void Start()
+    {
+        health = MaxHealth;
+        OnHealthInitialized?.Invoke(health);
+
+    }
     public void AddDamage(float damage)
     {
         if (canReceiveDamage)
